@@ -13,6 +13,8 @@ Since i only applied for a frontend role the bot is only client based and don't 
 
 You can visit and try it out [here](https://fizzbuzz-bot-game.vercel.app/).
 
+There are some comments through out the code, but for further questions hit me up att [gabbe.stark@gmail.com](mailto:gabbe.stark@gmail.com?subject=FizzBuzz%20bot%20questions)
+
 # Run it locally
 
 ## Requirements
