@@ -1,38 +1,110 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  align-items: center;
+}
+
+header {
+  height: 2rem;
+  background-color: rgb(255, 224, 25);
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+header p {
+  margin: 0;
+}
+
+.ChatContainer {
+  width: 50%;
+  height: 75vh;
+  border: 1px black solid;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.ChatInputField {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 224, 25);
+  height: 7%;
+}
+
+.ChatInputField input {
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 0 5px;
+  width: 50%;
+  transition: all 500ms ease;
+}
+
+.ChatInputField input:focus {
+  width: 100%;
+}
+
+.ChatInputField button {
+  border-radius: 15px;
+  padding: 5px;
+  background-color: rgb(255, 224, 25);
+  border: none;
+  cursor: pointer;
+  transition: all 500ms ease;
+  font-size: 16px;
+  margin: 0 5px;
+  width: 4rem;
+}
+
+.ChatInputField button:hover {
+  background-color: rgb(18, 88, 87);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.ChatMessageList {
+  height: calc(97% - 20px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.ChatMsg {
+  border-radius: 15px;
+  padding: 7px;
+  margin: 5px;
+  max-width: 75%;
+}
+
+.user {
+  background-color: rgb(18, 88, 87);
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+.bot {
+  background-color: #E4E6EB;
+  margin-right: auto;
+  text-align: left;
+}
+
+@media only screen and (max-width: 550px) {
+  .ChatContainer {
+    height: calc((100vh - 10px) - 4rem);
+    border: none;
+    width: 100%;
+    padding-top: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .ChatContainer button {
+    background-color: rgb(18, 88, 87);
+    color: white;
   }
 }

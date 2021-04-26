@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import ChatContainer from './components/ChatContainer'
+import { ChatLogProvider } from './providers/ChatLogProvider'
+import Bot from './utils/Bot'
+import Header from './components/Header'
 
 function App() {
+  // I use the provider here to make sure that everything has access to the chatLog
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ChatLogProvider>
+      <div className="App">
+        <Header />
+        <Bot />
+        <ChatContainer />
+      </div>
+    </ChatLogProvider>
+  )
 }
 
-export default App;
+export default App
