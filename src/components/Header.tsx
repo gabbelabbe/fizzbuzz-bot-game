@@ -2,7 +2,7 @@ const Header = () => {
 
   return (
     <header>
-      <p>FizzBuzz by Gabriel Stark</p>
+      <p>FizzBuzz by <a href='https://github.com/gabbelabbe' target='_blank' rel='noreferrer'>Gabriel Stark</a></p>
     </header>
   )
 }
