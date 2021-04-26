@@ -11,7 +11,7 @@ It work both for mobile and for desktop.
 
 Since i only applied for a frontend role the bot is only client based and don't use a backend, but this is a feature I wan't to add in the future, I'm thinking a loggin system where your entire chatLog is saved aswell as you can login and see imporvements and also make it customizable per user. For exampel more than 1 -> 100, maybe buzz at 7 and much more.
 
-You can visit it [here](https://google.com).
+You can visit and try it out [here](https://fizzbuzz-bot-game.vercel.app/).
 
 # Run it locally
 
