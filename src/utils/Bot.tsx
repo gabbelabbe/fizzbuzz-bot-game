@@ -119,6 +119,10 @@ const Bot = () => {
         sender: 'bot',
       },
       {
+        text: `If you wan't to give up just say "i give up" or "stop"`,
+        sender: 'bot',
+      },
+      {
         text: "And that's it! 😎",
         sender: 'bot',
       },
@@ -159,49 +163,69 @@ const Bot = () => {
   // The logic for running the game
   const playGame = (chatLogItem: iChatLogItem) => {
     const msgs: iChatLogItem[] = []
-    let tempScore = score
-    // checks if you got it right or not
-    if (fizzBuzzPattern[gameIndex] === chatLogItem.text.toLocaleLowerCase()) {
-      tempScore++
-      msgs.push({ text: 'Shoot! You got it right! 😤', sender: 'bot' })
-    } else {
-      if (fizzBuzzPattern.includes(chatLogItem.text.toLocaleLowerCase()) || parseInt(chatLogItem.text)) {
-        msgs.push({ text: `HAH! You got it wrong! It should have been ${fizzBuzzPattern[gameIndex]} 😎`, sender: 'bot' })
-      } else {
-        msgs.push({ text: `ok... you are not even trying... you should have said ${fizzBuzzPattern[gameIndex]}...`, sender: 'bot' })
-      }
-    }
     
-    // checks if the game is over or you should continue
-    if (!fizzBuzzPattern[gameIndex + 1] || !fizzBuzzPattern[gameIndex + 2]) {
+    // Check if the player want to continue playing the game or not
+    if (chatLogItem.text.toLocaleLowerCase() === 'i give up' || chatLogItem.text.toLocaleLowerCase() === 'stop') {
+      msgs.push({ text: `Huh? You give up already? I guess that's ok... 🙄`, sender: 'bot' })
+      msgs.push({ text: `Anyway, you got ${score} points 👏`, sender: 'bot' })
 
-      // checks if the bot has the last input and then adds so that the bot finishes the pattern
-      if (fizzBuzzPattern[gameIndex + 1]) {
-        msgs.push({ text: fizzBuzzPattern[gameIndex + 1], sender: 'bot' })
-      }
-
-      msgs.push({ text: 'The game is over! 💩', sender: 'bot' })
-      msgs.push({ text: `You got a score of ${tempScore} points! 🤩`, sender: 'bot' })
-      
-      // adds the new highscore and saves it in the browser
       if (score >= highScore) {
-        msgs.push({ text: "Would you look at that! That's a new highscore! 🤯", sender: 'bot' })
-        setHighScore(tempScore)
-        localStorage.setItem('highScore', tempScore.toString())
+        msgs.push({ text: "Would you look at that! That's a new highscore even though you gave up! 🤯", sender: 'bot' })
+        setHighScore(score)
+        localStorage.setItem('highScore', score.toString())
       } else {
-        msgs.push({ text: `You were ${highScore - tempScore} points off your highscore! 😢`, sender: 'bot' })
+        msgs.push({ text: `You were ${highScore - score} points off your highscore! 😢`, sender: 'bot' })
       }
-      
-      // sends msgs and also resets the game
+
       setChatLog([...chatLog, ...msgs])
       setGameIndex(0)
       setPlayingGame(false)
       setScore(0)
     } else {
-      msgs.push({ text: fizzBuzzPattern[gameIndex + 1], sender: 'bot' })
-      setChatLog([...chatLog, ...msgs])
-      setGameIndex(val => val + 2)
-      setScore(tempScore)
+      let tempScore = score
+      // checks if you got it right or not
+      if (fizzBuzzPattern[gameIndex] === chatLogItem.text.toLocaleLowerCase()) {
+        tempScore++
+        msgs.push({ text: 'Shoot! You got it right! 😤', sender: 'bot' })
+      } else {
+        if (fizzBuzzPattern.includes(chatLogItem.text.toLocaleLowerCase()) || parseInt(chatLogItem.text)) {
+          msgs.push({ text: `HAH! You got it wrong! It should have been ${fizzBuzzPattern[gameIndex]} 😎`, sender: 'bot' })
+        } else {
+          msgs.push({ text: `ok... you are not even trying... you should have said ${fizzBuzzPattern[gameIndex]}...`, sender: 'bot' })
+        }
+      }
+      
+      // checks if the game is over or you should continue
+      if (!fizzBuzzPattern[gameIndex + 1] || !fizzBuzzPattern[gameIndex + 2]) {
+  
+        // checks if the bot has the last input and then adds so that the bot finishes the pattern
+        if (fizzBuzzPattern[gameIndex + 1]) {
+          msgs.push({ text: fizzBuzzPattern[gameIndex + 1], sender: 'bot' })
+        }
+  
+        msgs.push({ text: 'The game is over! 💩', sender: 'bot' })
+        msgs.push({ text: `You got a score of ${tempScore} points! 🤩`, sender: 'bot' })
+        
+        // adds the new highscore and saves it in the browser
+        if (tempScore >= highScore) {
+          msgs.push({ text: "Would you look at that! That's a new highscore! 🤯", sender: 'bot' })
+          setHighScore(tempScore)
+          localStorage.setItem('highScore', tempScore.toString())
+        } else {
+          msgs.push({ text: `You were ${highScore - tempScore} points off your highscore! 😢`, sender: 'bot' })
+        }
+        
+        // sends msgs and also resets the game
+        setChatLog([...chatLog, ...msgs])
+        setGameIndex(0)
+        setPlayingGame(false)
+        setScore(0)
+      } else {
+        msgs.push({ text: fizzBuzzPattern[gameIndex + 1], sender: 'bot' })
+        setChatLog([...chatLog, ...msgs])
+        setGameIndex(val => val + 2)
+        setScore(tempScore)
+      }
     }
   }
 
