@@ -71,7 +71,7 @@ const Bot = () => {
   const fizzBuzzText = () => {
     const msgs: iChatLogItem[] = [
       { 
-        text: 'Fizzbuzz is a computer program commonly used as a test for potentionall employees 🤹‍♀️',
+        text: 'Fizzbuzz is a computer program commonly used as a test for potential employees 🤹‍♀️',
         sender: 'bot' 
       }, 
       { 
@@ -165,7 +165,11 @@ const Bot = () => {
       tempScore++
       msgs.push({ text: 'Shoot! You got it right! 😤', sender: 'bot' })
     } else {
-      msgs.push({ text: `HAH! You got it wrong! It should have been ${fizzBuzzPattern[gameIndex]} 😎`, sender: 'bot' })
+      if (fizzBuzzPattern.includes(chatLogItem.text.toLocaleLowerCase()) || parseInt(chatLogItem.text)) {
+        msgs.push({ text: `HAH! You got it wrong! It should have been ${fizzBuzzPattern[gameIndex]} 😎`, sender: 'bot' })
+      } else {
+        msgs.push({ text: `ok... you are not even trying... you should have said ${fizzBuzzPattern[gameIndex]}...`, sender: 'bot' })
+      }
     }
     
     // checks if the game is over or you should continue
